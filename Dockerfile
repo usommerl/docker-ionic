@@ -16,6 +16,7 @@ RUN \
   apt-get update -qqy && \
   apt-get install -y --force-yes \
     curl \
+    bzip2 \
     expect \
     git \
     libc6-i386 \
