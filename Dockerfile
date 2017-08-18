@@ -24,6 +24,7 @@ RUN \
     lib32gcc1 \
     lib32ncurses5 \
     lib32z1 \
+    python \
     unzip \
     wget \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
