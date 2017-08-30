@@ -11,7 +11,6 @@ ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 # Install dependencies
 # -----------------------------------------------------------------------------
 RUN \
-  apt-get update -qqy && \
   dpkg --add-architecture i386 && \
   apt-get update -qqy && \
   apt-get install -y --force-yes \
