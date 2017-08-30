@@ -4,7 +4,7 @@ FROM node:slim
 # Variables
 # -----------------------------------------------------------------------------
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
-ENV ANDROID_HOME /opt/android-sdk-linux
+ENV ANDROID_HOME /opt/android-sdk
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
 # -----------------------------------------------------------------------------
@@ -51,7 +51,7 @@ RUN yarn global add cordova ionic
 # Install Android SDK
 # -----------------------------------------------------------------------------
 RUN cd /opt && \
-    wget https://dl.google.com/android/repository/tools_r25.2.3-linux.zip && \
-    unzip tools_r25.2.3-linux.zip -d android-sdk-linux && \
-    rm tools_r25.2.3-linux.zip && \
-    (echo y | android-sdk-linux/tools/android update sdk -u -a -t 1,2,3,6,10,14,16,23,32,33,34,35,36,38,124,160,166,167,168,169,170,171,172)
+  wget -q $(wget -q -O- 'https://developer.android.com/sdk' | grep -o "\"https://.*android.*tools.*linux.*\"" | sed "s/\"//g") && \
+  unzip -d android-sdk *tools*linux*.zip && rm *tools*linux*.zip && \
+  mkdir ~/.android && touch ~/.android/repositories.cfg && \
+  yes | android-sdk/tools/bin/sdkmanager "platform-tools" "platforms;android-26"
