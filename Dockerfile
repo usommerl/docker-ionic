@@ -17,7 +17,6 @@ RUN \
     curl \
     build-essential \
     bzip2 \
-    expect \
     git \
     libc6-i386 \
     libqt5widgets5 \
