@@ -60,4 +60,4 @@ RUN cd /opt && \
   wget -q $(wget -q -O- 'https://developer.android.com/sdk' | grep -o "\"https://.*android.*tools.*linux.*\"" | sed "s/\"//g") && \
   unzip -d android-sdk *tools*linux*.zip && rm *tools*linux*.zip && \
   mkdir ~/.android && touch ~/.android/repositories.cfg && \
-  yes | android-sdk/tools/bin/sdkmanager "platform-tools" "platforms;android-26"
+  yes | android-sdk/tools/bin/sdkmanager "platform-tools" "platforms;android-25"
