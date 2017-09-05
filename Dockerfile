@@ -44,8 +44,14 @@ RUN \
 
 # -----------------------------------------------------------------------------
 # Install ionic
+# Note: Cordova package installs a outdated npm binary as a dependency.
+#       We need to remove the outdated npm binary and restore the symlink
+#       to the original npm version that is included in the base image.
 # -----------------------------------------------------------------------------
-RUN yarn global add cordova ionic
+RUN yarn global add cordova ionic && \
+    rm -f "$(yarn global bin)/npm" && \
+    cd /usr/local/bin && \
+    ln -s ../lib/node_modules/npm/bin/npm-cli.js npm
 
 # -----------------------------------------------------------------------------
 # Install Android SDK
