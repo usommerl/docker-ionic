@@ -45,16 +45,16 @@ RUN \
   rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
 
 # -----------------------------------------------------------------------------
-# Install ionic
-# Note: Cordova package installs an outdated npm binary as a dependency.
-#       We need to remove the outdated npm binary and restore the symlink
-#       to the original npm version that is included in the base image.
+# Install Gradle
 # -----------------------------------------------------------------------------
 RUN \
-  yarn global add cordova ionic && \
-  rm -f "$(yarn global bin)/npm" && \
-  cd /usr/local/bin && \
-  ln -s ../lib/node_modules/npm/bin/npm-cli.js npm
+  cd /opt && \
+  wget -q $(wget -q -O- https://gradle.org/install/ \
+    | grep -o 'https://.*gradle.*bin.zip' \
+    | head -n 1) && \
+  unzip gradle*bin*.zip && rm gradle*bin.zip && \
+  cd gradle*/bin/ && \
+  ln -s "$(pwd)/gradle" /usr/local/bin/
 
 # -----------------------------------------------------------------------------
 # Install Android SDK
@@ -67,3 +67,15 @@ RUN \
   unzip -d android-sdk *tools*linux*.zip && rm *tools*linux*.zip && \
   mkdir ~/.android && touch ~/.android/repositories.cfg && \
   yes | android-sdk/tools/bin/sdkmanager "platform-tools" "platforms;android-25"
+
+# -----------------------------------------------------------------------------
+# Install ionic
+# Note: Cordova package installs an outdated npm binary as a dependency.
+#       We need to remove the outdated npm binary and restore the symlink
+#       to the original npm version that is included in the base image.
+# -----------------------------------------------------------------------------
+RUN \
+  yarn global add cordova ionic && \
+  rm -f "$(yarn global bin)/npm" && \
+  cd /usr/local/bin && \
+  ln -s ../lib/node_modules/npm/bin/npm-cli.js npm
