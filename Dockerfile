@@ -25,6 +25,8 @@ RUN \
     lib32ncurses5 \
     lib32z1 \
     python \
+    ruby \
+    ruby-dev \
     unzip \
     wget \
     && rm -rf /var/lib/apt/lists/* /tmp/* /var/tmp/*
@@ -50,8 +52,8 @@ RUN \
 RUN \
   cd /opt && \
   wget -q $(wget -q -O- https://gradle.org/install/ \
-    | grep -o 'https://.*gradle.*bin.zip' \
-    | head -n 1) && \
+    | grep -o '"https://.*gradle.*bin.zip"' \
+    | sed -e 's/"//g') && \
   unzip gradle*bin*.zip && rm gradle*bin.zip && \
   cd gradle*/bin/ && \
   ln -s "$(pwd)/gradle" /usr/local/bin/
@@ -62,11 +64,16 @@ RUN \
 RUN \
   cd /opt && \
   wget -q $(wget -q -O- 'https://developer.android.com/sdk' \
-    | grep -o "\"https://.*android.*tools.*linux.*\"" \
-    | sed "s/\"//g") && \
+    | grep -o '"https://.*android.*tools.*linux.*"' \
+    | sed 's/"//g') && \
   unzip -d android-sdk *tools*linux*.zip && rm *tools*linux*.zip && \
   mkdir ~/.android && touch ~/.android/repositories.cfg && \
   yes | android-sdk/tools/bin/sdkmanager "platform-tools" "build-tools;25.0.0" "platforms;android-25"
+
+# -----------------------------------------------------------------------------
+# Install Fastlane
+# -----------------------------------------------------------------------------
+RUN gem install fastlane
 
 # -----------------------------------------------------------------------------
 # Install ionic
