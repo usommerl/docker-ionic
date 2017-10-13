@@ -68,7 +68,7 @@ RUN \
     | sed 's/"//g') && \
   unzip -d android-sdk *tools*linux*.zip && rm *tools*linux*.zip && \
   mkdir ~/.android && touch ~/.android/repositories.cfg && \
-  yes | android-sdk/tools/bin/sdkmanager "platform-tools" "build-tools;25.0.0" "platforms;android-25"
+  yes | android-sdk/tools/bin/sdkmanager "platform-tools" "build-tools;26.0.0" "platforms;android-26"
 
 # -----------------------------------------------------------------------------
 # Install Fastlane
