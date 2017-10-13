@@ -86,3 +86,5 @@ RUN \
   rm -f "$(yarn global bin)/npm" && \
   cd /usr/local/bin && \
   ln -s ../lib/node_modules/npm/bin/npm-cli.js npm
+
+EXPOSE 8100 35729
