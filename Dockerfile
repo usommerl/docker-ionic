@@ -76,13 +76,13 @@ RUN \
 RUN gem install fastlane
 
 # -----------------------------------------------------------------------------
-# Install ionic
+# Install cordova, ionic and firebase
 # Note: Cordova package installs an outdated npm binary as a dependency.
 #       We need to remove the outdated npm binary and restore the symlink
 #       to the original npm version that is included in the base image.
 # -----------------------------------------------------------------------------
 RUN \
-  yarn global add cordova ionic && \
+  yarn global add cordova ionic firebase-tools && \
   rm -f "$(yarn global bin)/npm" && \
   cd /usr/local/bin && \
   ln -s ../lib/node_modules/npm/bin/npm-cli.js npm
