@@ -14,6 +14,7 @@ RUN \
   dpkg --add-architecture i386 && \
   apt-get update -qqy && \
   apt-get install -y --force-yes \
+    chromium \
     curl \
     build-essential \
     bzip2 \
