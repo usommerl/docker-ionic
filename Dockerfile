@@ -5,6 +5,7 @@ FROM node:slim
 # -----------------------------------------------------------------------------
 ENV JAVA_HOME /usr/lib/jvm/java-8-oracle
 ENV ANDROID_HOME /opt/android-sdk
+ENV CHROME_BIN=/usr/bin/chromium
 ENV PATH ${PATH}:${ANDROID_HOME}/tools:${ANDROID_HOME}/platform-tools
 
 # -----------------------------------------------------------------------------
